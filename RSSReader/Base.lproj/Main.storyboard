@@ -20,6 +20,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.8980392157" green="0.45098039220000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.8980392157" green="0.45098039220000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="jK0-T8-TZa" kind="relationship" relationship="viewControllers" id="n9t-Sh-D45"/>
@@ -167,9 +168,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EJm-5w-x2A">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EJm-5w-x2A">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.9569466466635046" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8lx-B2-h3r">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -177,6 +178,10 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="05z-VV-dL3" id="rSv-bj-Eaw"/>
+                                    <outlet property="delegate" destination="05z-VV-dL3" id="sW8-yD-rLL"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -189,8 +194,15 @@
                         <viewLayoutGuide key="safeArea" id="kic-kF-YUS"/>
                     </view>
                     <navigationItem key="navigationItem" id="bYr-yx-qQz">
-                        <barButtonItem key="leftBarButtonItem" title="+ Add" id="YGp-Kx-5gz"/>
+                        <barButtonItem key="leftBarButtonItem" title="+ Add" id="YGp-Kx-5gz">
+                            <connections>
+                                <action selector="addAction:" destination="05z-VV-dL3" id="gry-cZ-Bth"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cvChannels" destination="EJm-5w-x2A" id="iUA-PR-2cb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7Z-Vr-I2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

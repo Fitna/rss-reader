@@ -8,8 +8,10 @@
 import UIKit
 
 class FeedViewController: UIViewController {
+    var channels: [RSSChannel] = [] { didSet { updateChannels }}
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        channels = DefaultsUtils.getChannels()
     }
 }
