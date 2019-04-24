@@ -7,14 +7,17 @@
 
 import UIKit
 
-class RSSChannel: Codable {
-    var url: URL
-    var imageURL: URL?
-    var shortDescription: String?
+class RSSChannel: Codable, Equatable {
+    let url: URL
     var title: String?
+    var summary: String?
     var favorite: Bool = false
 
     init(url: URL) {
         self.url = url
+    }
+
+    static func == (lhs: RSSChannel, rhs: RSSChannel) -> Bool {
+        return lhs.url == rhs.url
     }
 }

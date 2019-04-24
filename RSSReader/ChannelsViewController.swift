@@ -9,6 +9,7 @@ import UIKit
 
 class ChannelsViewController: UIViewController {
     @IBOutlet weak var cvChannels: UICollectionView!
+    var parcer: RSSParcer = RSSParcer()
 
     var channels: [RSSChannel] = [] {
         didSet {
@@ -20,12 +21,14 @@ class ChannelsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        self.channels = DefaultsUtils.getChannels()
     }
 
     func setupViews() {
         self.cvChannels.register(UINib(nibName: RSSChannelCollectionViewCell.className, bundle: nil),
                                  forCellWithReuseIdentifier: RSSChannelCollectionViewCell.className)
+        InnerNotification.channelsDidChange.startObserve(by: self, selector: #selector(channelsDidChange))
+        InnerNotification.channelInfoDidChange.startObserve(by: self, selector: #selector(channelInfoDidChange))
+        self.channels = DefaultsUtils.getChannels()
     }
 
     // MARK: - User actions
@@ -58,7 +61,40 @@ class ChannelsViewController: UIViewController {
     }
 
     // MARK: - Data
+    @objc func channelsDidChange(_ notification: Notification) {
+        if let channels = notification.object as? [RSSChannel] {
+            self.channels = channels
+        }
+    }
+
+    @objc func channelInfoDidChange(_ notification: Notification) {
+        if let channel = notification.object as? RSSChannel {
+            if let index = self.channels.firstIndex(of: channel) {
+                self.channels[index] = channel
+            }
+        }
+    }
+
     func addChannel(with url: URL) {
+        guard url.host != nil, url.scheme != nil else {
+            self.presentAlert(with: "Invalid URL")
+            return
+        }
+
+        let channel = RSSChannel(url: url)
+        do {
+            try parcer.parce(channel, completion: { _, error in
+                if let error = error {
+                    self.presentAlert(with: error.localizedDescription)
+                } else {
+                    DefaultsUtils.save(channel: channel)
+                }
+            })
+        } catch RSSParcerError.parcingInProgress {
+            print("Can't parce, parcing in progress")
+        } catch {
+            print("\(error)")
+        }
     }
 }
 
@@ -67,11 +103,31 @@ extension ChannelsViewController: UICollectionViewDataSource, UICollectionViewDe
         return channels.count
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 120)
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RSSChannelCollectionViewCell.className, for: indexPath)
         if let channelCell = cell as? RSSChannelCollectionViewCell {
+            channelCell.delegate = self
             channelCell.channel = channels[safe: indexPath.item]
         }
         return cell
+    }
+}
+
+extension ChannelsViewController: RSSChannelCollectionViewCellDelegate {
+    func channelCellDidTapFavorites(_ cell: RSSChannelCollectionViewCell) {
+        if let channel = cell.channel {
+            channel.favorite = !channel.favorite
+            DefaultsUtils.save(channel: channel)
+        }
+    }
+
+    func channelCellDidTapDelete(_ cell: RSSChannelCollectionViewCell) {
+        if let channel = cell.channel {
+            DefaultsUtils.remove(channel: channel)
+        }
     }
 }

@@ -18,3 +18,13 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+extension UIViewController {
+    func presentAlert(with text: String) {
+        let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: { _ in
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
+}

@@ -9,6 +9,7 @@ import UIKit
 
 enum InnerNotification: String {
     case channelsDidChange
+    case channelInfoDidChange
 
     private func getFullName() -> NSNotification.Name {
         return NSNotification.Name(rawValue: "com.astrum-vitriolum.rss-reader." + self.rawValue)
