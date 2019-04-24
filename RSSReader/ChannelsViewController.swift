@@ -81,20 +81,13 @@ class ChannelsViewController: UIViewController {
             return
         }
 
-        let parcer = RSSParcer()
         let channel = RSSChannel(url: url)
-        do {
-            try parcer.parce(channel, completion: { _, error in
-                if let error = error {
-                    self.presentAlert(with: error.localizedDescription)
-                } else {
-                    DefaultsUtils.save(channel: channel)
-                }
-            })
-        } catch RSSParcerError.parcingInProgress {
-            print("Can't parce, parcing in progress")
-        } catch {
-            print("\(error)")
+        RSSParcer.parce(channel) { _, error in
+            if let error = error {
+                self.presentAlert(with: error.localizedDescription)
+            } else {
+                DefaultsUtils.save(channel: channel)
+            }
         }
     }
 }

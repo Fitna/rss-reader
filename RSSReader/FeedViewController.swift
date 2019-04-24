@@ -16,8 +16,8 @@ class FeedViewController: UIViewController {
     @IBOutlet weak var cvFeed: UICollectionView!
 
     var channels: [RSSChannel] = [] { didSet { updateChannels() } }
-    var feedItems: [MWFeedItem] = [] { didSet { updateFeedItems() }  }
-    var mode: FeedViewControllerMode = .all  { didSet { updateChannels() } }
+    var feedItems: [MWFeedItem] = [] { didSet { updateFeedItems() } }
+    var mode: FeedViewControllerMode = .all { didSet { updateChannels() } }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,14 +46,13 @@ class FeedViewController: UIViewController {
                 continue
             }
 
-            let parcer = RSSParcer()
-            try? parcer.parce(channel) { (items, _) in
+            RSSParcer.parce(channel) { (items, _) in
                 self.feedItems.append(contentsOf: items)
             }
         }
     }
 
-    private func updateFeedItems()  {
+    private func updateFeedItems() {
         self.loadViewIfNeeded()
         self.cvFeed.reloadData()
     }
@@ -62,7 +61,7 @@ class FeedViewController: UIViewController {
     @IBAction func refreshAction(_ sender: Any) {
         updateChannels()
     }
-    
+
     // MARK: - Data
     @objc private func channelsDidChange(_ notification: Notification) {
         if let channels = notification.object as? [RSSChannel] {

@@ -8,28 +8,42 @@
 import UIKit
 import MWFeedParser
 
-enum RSSParcerError: Error {
-    case parcingInProgress
-}
 class RSSParcer: NSObject {
-    private(set) var items: [MWFeedItem] = []
-    private(set) var channel: RSSChannel?
+    private var items: [MWFeedItem] = []
+    let channel: RSSChannel
 
-    private var completion: (([MWFeedItem], Error?) -> Void)?
+    private var completions: [(([MWFeedItem], Error?) -> Void)] = []
     private var isPacring = false
 
-    func parce(_ channel: RSSChannel, completion: @escaping (([MWFeedItem], Error?) -> Void)) throws {
-        if isPacring {
-            throw RSSParcerError.parcingInProgress
+    private static var parcers: [WeakRef<RSSParcer>] = []
+
+    static func parce(_ channel: RSSChannel, completion: @escaping (([MWFeedItem], Error?) -> Void)) {
+        var parcer = parcers.reap().first(where: { $0.channel == channel })
+        if parcer == nil {
+            parcer = RSSParcer(with: channel)
+            self.parcers.append(WeakRef(value: parcer))
         }
+        parcer?.parce(with: completion)
+    }
+
+    private init(with channel: RSSChannel) {
+        self.channel = channel
+    }
+
+    private func parce(with completion: @escaping (([MWFeedItem], Error?) -> Void)) {
+        self.completions.append(completion)
+        if isPacring {
+            print("skip parce for \(self.channel.url)")
+            return
+        }
+        print("parce for \(self.channel.url)")
         isPacring = true
 
-        self.channel = channel
-        self.completion = completion
-
-        if let parcer = MWFeedParser(feedURL: channel.url) {
-            parcer.delegate = self
-            parcer.parse()
+        DispatchQueue.global(qos: .background).async {
+            if let parcer = MWFeedParser(feedURL: self.channel.url) {
+                parcer.delegate = self
+                parcer.parse()
+            }
         }
     }
 }
@@ -41,8 +55,8 @@ extension RSSParcer: MWFeedParserDelegate {
     }
 
     func feedParser(_ parser: MWFeedParser!, didParseFeedInfo info: MWFeedInfo!) {
-        self.channel?.title = info.title
-        self.channel?.summary = info.summary
+        self.channel.title = info.title
+        self.channel.summary = info.summary
     }
 
     func feedParser(_ parser: MWFeedParser!, didParseFeedItem item: MWFeedItem!) {
@@ -50,14 +64,24 @@ extension RSSParcer: MWFeedParserDelegate {
     }
 
     func feedParserDidFinish(_ parser: MWFeedParser!) {
-        completion?(items, nil)
-        completion = nil
-        isPacring = false
+        DispatchQueue.main.async {
+            print("finish parce for \(self.channel.url)")
+            for completion in self.completions {
+                completion(self.items, nil)
+            }
+            self.completions = []
+            self.isPacring = false
+        }
     }
 
     func feedParser(_ parser: MWFeedParser!, didFailWithError error: Error!) {
-        completion?(items, error)
-        completion = nil
-        isPacring = false
+        DispatchQueue.main.async {
+            print("error parce for \(self.channel.url): \(error.localizedDescription)")
+            for completion in self.completions {
+                completion(self.items, error)
+            }
+            self.completions = []
+            self.isPacring = false
+        }
     }
 }
