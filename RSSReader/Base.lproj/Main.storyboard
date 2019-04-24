@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Main View Controller-->
         <scene sceneID="3Ay-PK-Ypk">
             <objects>
-                <tabBarController id="sFb-SP-PG2" sceneMemberID="viewController">
+                <tabBarController id="sFb-SP-PG2" customClass="MainViewController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="RKe-ig-ou8"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e8h-SL-10k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -68,6 +68,10 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="AxP-uN-UJN" id="uAu-JS-F8v"/>
+                                    <outlet property="delegate" destination="AxP-uN-UJN" id="h0i-lA-ggd"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -80,12 +84,19 @@
                         <viewLayoutGuide key="safeArea" id="LwZ-w6-5vf"/>
                     </view>
                     <navigationItem key="navigationItem" id="g3O-yC-IbJ">
-                        <barButtonItem key="rightBarButtonItem" image="refresh" id="abq-GM-vbb"/>
+                        <barButtonItem key="rightBarButtonItem" image="refresh" id="abq-GM-vbb">
+                            <connections>
+                                <action selector="refreshAction:" destination="AxP-uN-UJN" id="nGA-8b-Ndw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cvFeed" destination="M1N-kd-VEN" id="FWG-px-ksx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3r6-lw-1Od" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1629" y="-346"/>
+            <point key="canvasLocation" x="1712" y="-19"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="XkD-kg-TQS">
@@ -98,49 +109,12 @@
                         <color key="tintColor" red="0.8980392157" green="0.45098039220000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="50N-98-iaK" kind="relationship" relationship="rootViewController" id="xQb-gb-upm"/>
+                        <segue destination="AxP-uN-UJN" kind="relationship" relationship="rootViewController" id="fYa-sU-56u"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8lF-7M-vdY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="764" y="347"/>
-        </scene>
-        <!--Feed View Controller-->
-        <scene sceneID="Em7-Y6-PhK">
-            <objects>
-                <viewController id="50N-98-iaK" customClass="FeedViewController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0vx-Ur-Wfe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HRD-EU-RPz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rf6-8H-Qf2">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="HRD-EU-RPz" firstAttribute="top" secondItem="0vx-Ur-Wfe" secondAttribute="top" id="MYK-9G-RjK"/>
-                            <constraint firstItem="HRD-EU-RPz" firstAttribute="leading" secondItem="0vx-Ur-Wfe" secondAttribute="leading" id="REr-79-Zhg"/>
-                            <constraint firstAttribute="bottom" secondItem="HRD-EU-RPz" secondAttribute="bottom" id="dDa-IH-CaQ"/>
-                            <constraint firstAttribute="trailing" secondItem="HRD-EU-RPz" secondAttribute="trailing" id="kNB-nB-xL0"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="oR9-jZ-JEF"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="2cc-Wn-HQi">
-                        <barButtonItem key="rightBarButtonItem" image="refresh" id="mBR-FI-XAN"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="56h-UC-eR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1629" y="347"/>
         </scene>
         <!--Channels-->
         <scene sceneID="i55-yo-sf1">
@@ -215,4 +189,7 @@
         <image name="rss" width="28" height="28"/>
         <image name="star" width="28" height="27"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="fYa-sU-56u"/>
+    </inferredMetricsTieBreakers>
 </document>

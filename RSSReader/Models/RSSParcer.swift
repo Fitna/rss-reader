@@ -12,8 +12,9 @@ enum RSSParcerError: Error {
     case parcingInProgress
 }
 class RSSParcer: NSObject {
-    private(set) var items = [MWFeedItem]()
+    private(set) var items: [MWFeedItem] = []
     private(set) var channel: RSSChannel?
+
     private var completion: (([MWFeedItem], Error?) -> Void)?
     private var isPacring = false
 

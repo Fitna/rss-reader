@@ -17,6 +17,7 @@
 		03543D092270B07F00B72DCB /* InnerNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03543D082270B07F00B72DCB /* InnerNotification.swift */; };
 		03543D0B2270B23600B72DCB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03543D0A2270B23600B72DCB /* Utils.swift */; };
 		03543D0D2270BD5100B72DCB /* RSSParcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03543D0C2270BD5100B72DCB /* RSSParcer.swift */; };
+		03543D0F2270D91500B72DCB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03543D0E2270D91500B72DCB /* MainViewController.swift */; };
 		038BB3F7226FE55600C1C542 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038BB3F6226FE55600C1C542 /* AppDelegate.swift */; };
 		038BB3F9226FE55600C1C542 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038BB3F8226FE55600C1C542 /* FeedViewController.swift */; };
 		038BB3FC226FE55700C1C542 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 038BB3FA226FE55700C1C542 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		03543D082270B07F00B72DCB /* InnerNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerNotification.swift; sourceTree = "<group>"; };
 		03543D0A2270B23600B72DCB /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		03543D0C2270BD5100B72DCB /* RSSParcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParcer.swift; sourceTree = "<group>"; };
+		03543D0E2270D91500B72DCB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		038BB3F3226FE55600C1C542 /* RSSReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038BB3F6226FE55600C1C542 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		038BB3F8226FE55600C1C542 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				038BB3F6226FE55600C1C542 /* AppDelegate.swift */,
 				038BB3FA226FE55700C1C542 /* Main.storyboard */,
+				03543D0E2270D91500B72DCB /* MainViewController.swift */,
 				038BB3F8226FE55600C1C542 /* FeedViewController.swift */,
 				03543D002270A01100B72DCB /* ChannelsViewController.swift */,
 				034528C1226FEBE000826BD4 /* Views */,
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03543D012270A01100B72DCB /* ChannelsViewController.swift in Sources */,
+				03543D0F2270D91500B72DCB /* MainViewController.swift in Sources */,
 				034528C4226FEC0E00826BD4 /* RSSChannelCollectionViewCell.swift in Sources */,
 				03543D0B2270B23600B72DCB /* Utils.swift in Sources */,
 				034528C8226FEC4E00826BD4 /* RSSFeedCollectionViewCell.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MWFeedParser
 
 protocol RSSChannelCollectionViewCellDelegate: AnyObject {
     func channelCellDidTapFavorites(_ cell: RSSChannelCollectionViewCell)
