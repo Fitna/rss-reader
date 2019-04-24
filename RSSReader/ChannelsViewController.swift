@@ -10,11 +10,7 @@ import UIKit
 class ChannelsViewController: UIViewController {
     @IBOutlet weak var cvChannels: UICollectionView!
 
-    var channels: [RSSChannel] = [] {
-        didSet {
-            updateChannels()
-        }
-    }
+    var channels: [RSSChannel] = [] { didSet { updateChannels() } }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -22,18 +18,21 @@ class ChannelsViewController: UIViewController {
         setupViews()
     }
 
-    func setupViews() {
+    // MARK: - Views
+    private func setupViews() {
         self.cvChannels.register(UINib(nibName: RSSChannelCollectionViewCell.className, bundle: nil),
                                  forCellWithReuseIdentifier: RSSChannelCollectionViewCell.className)
         InnerNotification.channelsDidChange.startObserve(by: self, selector: #selector(channelsDidChange))
         InnerNotification.channelInfoDidChange.startObserve(by: self, selector: #selector(channelInfoDidChange))
         self.channels = DefaultsUtils.getChannels()
 
-        for channel in channels {
-            if channel.title == nil {
-                self.addChannel(with: channel.url)
-            }
+        for channel in channels where channel.title == nil {
+            self.addChannel(with: channel.url)
         }
+    }
+
+    private func updateChannels() {
+        cvChannels.reloadData()
     }
 
     // MARK: - User actions
@@ -60,46 +59,35 @@ class ChannelsViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    // MARK: - Views
-    func updateChannels() {
-        cvChannels.reloadData()
-    }
-
     // MARK: - Data
-    @objc func channelsDidChange(_ notification: Notification) {
+    @objc private func channelsDidChange(_ notification: Notification) {
         if let channels = notification.object as? [RSSChannel] {
             self.channels = channels
         }
     }
 
-    @objc func channelInfoDidChange(_ notification: Notification) {
+    @objc private func channelInfoDidChange(_ notification: Notification) {
         if let channel = notification.object as? RSSChannel {
             if let index = self.channels.firstIndex(of: channel) {
                 self.channels[index] = channel
+                self.cvChannels.reloadItems(at: [IndexPath(item: index, section: 0)])
             }
         }
     }
 
-    func addChannel(with url: URL) {
+    private func addChannel(with url: URL) {
         guard url.host != nil, url.scheme != nil else {
             self.presentAlert(with: "Invalid URL")
             return
         }
 
-        let parcer = RSSParcer()
         let channel = RSSChannel(url: url)
-        do {
-            try parcer.parce(channel, completion: { _, error in
-                if let error = error {
-                    self.presentAlert(with: error.localizedDescription)
-                } else {
-                    DefaultsUtils.save(channel: channel)
-                }
-            })
-        } catch RSSParcerError.parcingInProgress {
-            print("Can't parce, parcing in progress")
-        } catch {
-            print("\(error)")
+        RSSParcer.parce(channel) { _, error in
+            if let error = error {
+                self.presentAlert(with: error.localizedDescription)
+            } else {
+                DefaultsUtils.save(channel: channel)
+            }
         }
     }
 }
