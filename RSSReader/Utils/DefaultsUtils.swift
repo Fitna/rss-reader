@@ -18,8 +18,9 @@ enum DefaultsUtils {
         if let data = UserDefaults.standard.data(forKey: Keys.channels.rawValue) {
             channels = try? JSONDecoder().decode([RSSChannel].self, from: data)
         }
-        return channels ?? [RSSChannel(url: URL(string: "http://www.aif.ru/rss/news.php")!),
-                            RSSChannel(url: URL(string: "https://www.liga.net/tech/technology/rss.xml")!)]
+        return channels ?? [RSSChannel(url: URL(string: "https://www.liga.net/news/rss.xml")!),
+                            RSSChannel(url: URL(string: "https://www.liga.net/tech/technology/rss.xml")!),
+                            RSSChannel(url: URL(string: "https://www.liga.net/fin/crypto/rss.xml")!)]
     }
 
     private static func save(channels: [RSSChannel]) {

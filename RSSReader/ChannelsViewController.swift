@@ -9,7 +9,6 @@ import UIKit
 
 class ChannelsViewController: UIViewController {
     @IBOutlet weak var cvChannels: UICollectionView!
-    var parcer: RSSParcer = RSSParcer()
 
     var channels: [RSSChannel] = [] {
         didSet {
@@ -29,6 +28,12 @@ class ChannelsViewController: UIViewController {
         InnerNotification.channelsDidChange.startObserve(by: self, selector: #selector(channelsDidChange))
         InnerNotification.channelInfoDidChange.startObserve(by: self, selector: #selector(channelInfoDidChange))
         self.channels = DefaultsUtils.getChannels()
+
+        for channel in channels {
+            if channel.title == nil {
+                self.addChannel(with: channel.url)
+            }
+        }
     }
 
     // MARK: - User actions
@@ -81,6 +86,7 @@ class ChannelsViewController: UIViewController {
             return
         }
 
+        let parcer = RSSParcer()
         let channel = RSSChannel(url: url)
         do {
             try parcer.parce(channel, completion: { _, error in
