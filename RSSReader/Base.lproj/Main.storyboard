@@ -13,15 +13,15 @@
         <!--Navigation Controller-->
         <scene sceneID="ihU-Vb-gLp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dZk-kf-VoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="W0X-dO-gze" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hp3-Qy-V6k">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dZk-kf-VoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1567" y="178"/>
+            <point key="canvasLocation" x="-1561" y="347"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3Ay-PK-Ypk">
@@ -47,7 +47,6 @@
         <!--All feeds-->
         <scene sceneID="pwQ-gl-uOb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tFM-h4-5b6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="jK0-T8-TZa" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="All feeds" image="list" id="iJz-k0-9EV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bcr-1f-5wD">
@@ -59,13 +58,14 @@
                         <segue destination="AxP-uN-UJN" kind="relationship" relationship="rootViewController" id="1Iq-Yn-Qcn"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tFM-h4-5b6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="764" y="-346"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed View Controller-->
         <scene sceneID="Iu2-17-j1O">
             <objects>
-                <viewController id="AxP-uN-UJN" sceneMemberID="viewController">
+                <viewController id="AxP-uN-UJN" customClass="FeedViewController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="61q-aA-eW5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -102,7 +102,6 @@
         <!--Favourites-->
         <scene sceneID="XkD-kg-TQS">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8lF-7M-vdY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="n4t-so-Vuj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favourites" image="star" id="VIk-SS-wxG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ujJ-VL-Vap">
@@ -114,13 +113,14 @@
                         <segue destination="50N-98-iaK" kind="relationship" relationship="rootViewController" id="xQb-gb-upm"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8lF-7M-vdY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="764" y="347"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed View Controller-->
         <scene sceneID="Em7-Y6-PhK">
             <objects>
-                <viewController id="50N-98-iaK" sceneMemberID="viewController">
+                <viewController id="50N-98-iaK" customClass="FeedViewController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0vx-Ur-Wfe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,7 +157,6 @@
         <!--Channels-->
         <scene sceneID="i55-yo-sf1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8bf-Kx-tVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="i6f-Fg-XoP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Channels" image="rss" id="tKB-Ru-smD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FaA-Zp-EEd">
@@ -169,6 +168,7 @@
                         <segue destination="05z-VV-dL3" kind="relationship" relationship="rootViewController" id="3u4-kZ-kAZ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8bf-Kx-tVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="790" y="1096"/>
         </scene>
