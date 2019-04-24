@@ -70,6 +70,7 @@ class ChannelsViewController: UIViewController {
         if let channel = notification.object as? RSSChannel {
             if let index = self.channels.firstIndex(of: channel) {
                 self.channels[index] = channel
+                self.cvChannels.reloadItems(at: [IndexPath(item: index, section: 0)])
             }
         }
     }

@@ -30,6 +30,7 @@ class RSSChannelCollectionViewCell: UICollectionViewCell {
     func updateView() {
         lblName.text = channel?.title
         lblURL.text = channel?.url.absoluteString
+        btnFavorites.setTitle(channel?.favorite ?? false ? "Remove from favorites" : "Add to favorites", for: .normal)
     }
 
     @IBAction func addToFavoritesAction(_ sender: Any) {

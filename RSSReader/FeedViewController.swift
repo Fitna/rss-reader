@@ -16,7 +16,7 @@ class FeedViewController: UIViewController {
     @IBOutlet weak var cvFeed: UICollectionView!
 
     var channels: [RSSChannel] = [] { didSet { updateChannels() } }
-    var feedItems: [MWFeedItem] = []
+    var feedItems: [MWFeedItem] = [] { didSet { updateFeedItems() }  }
     var mode: FeedViewControllerMode = .all  { didSet { updateChannels() } }
 
     // MARK: - Lifecycle
@@ -51,6 +51,11 @@ class FeedViewController: UIViewController {
                 self.feedItems.append(contentsOf: items)
             }
         }
+    }
+
+    private func updateFeedItems()  {
+        self.loadViewIfNeeded()
+        self.cvFeed.reloadData()
     }
 
     // MARK: - User actions
