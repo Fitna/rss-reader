@@ -1,0 +1,67 @@
+disabled_rules:
+- identifier_name
+
+opt_in_rules:
+- empty_count
+- empty_string
+- force_unwrapping
+#- closure_end_indentation
+- closure_spacing
+- conditional_returns_on_newline
+- contains_over_first_not_nil
+- convenience_type
+- explicit_init
+- explicit_self
+#- explicit_type_interface
+- fallthrough
+- first_where
+- function_default_parameter_at_end
+- implicit_return
+- implicitly_unwrapped_optional
+- last_where
+- let_var_whitespace
+- literal_expression_end_indentation
+- modifier_order
+#- multiline_arguments
+- multiline_function_chains
+#- multiline_literal_brackets
+- multiline_parameters_brackets
+- number_separator
+- operator_usage_whitespace
+- overridden_super_call
+- yoda_condition
+- vertical_whitespace_opening_braces
+- vertical_whitespace_closing_braces
+- vertical_whitespace_between_cases
+- vertical_parameter_alignment
+
+excluded:
+- Carthage
+- Pods
+- SwiftLint/Common/3rdPartyLib
+
+line_length:
+    warning: 150
+    error: 200
+    ignores_function_declarations: true
+    ignores_comments: true
+    ignores_urls: true
+function_body_length:
+    warning: 300
+    error: 500
+function_parameter_count:
+    warning: 6
+    error: 8
+type_body_length:
+    warning: 300
+    error: 500
+file_length:
+    warning: 1000
+    error: 1500
+    ignore_comment_only_lines: true
+cyclomatic_complexity:
+    warning: 15
+    error: 25
+identifier_name:
+    min_length: 1
+reporter: "xcode"
