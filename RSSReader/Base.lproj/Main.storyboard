@@ -177,6 +177,10 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="05z-VV-dL3" id="rSv-bj-Eaw"/>
+                                    <outlet property="delegate" destination="05z-VV-dL3" id="sW8-yD-rLL"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -189,8 +193,15 @@
                         <viewLayoutGuide key="safeArea" id="kic-kF-YUS"/>
                     </view>
                     <navigationItem key="navigationItem" id="bYr-yx-qQz">
-                        <barButtonItem key="leftBarButtonItem" title="+ Add" id="YGp-Kx-5gz"/>
+                        <barButtonItem key="leftBarButtonItem" title="+ Add" id="YGp-Kx-5gz">
+                            <connections>
+                                <action selector="addAction:" destination="05z-VV-dL3" id="gry-cZ-Bth"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cvChannels" destination="EJm-5w-x2A" id="iUA-PR-2cb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7Z-Vr-I2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

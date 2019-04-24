@@ -12,9 +12,13 @@ class RSSChannelCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblURL: UILabel!
     @IBOutlet weak var btnFavorites: UIButton!
     @IBOutlet weak var btnDelete: UIButton!
-    
+
+    var channel: RSSChannel? { didSet { updateView() } }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+
+    func updateView() {
     }
 }
