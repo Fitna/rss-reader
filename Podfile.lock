@@ -8,17 +8,21 @@ PODS:
     - "MWFeedParser/NSString+HTML"
   - "MWFeedParser/NSDate+InternetDateTime (1.0.1)"
   - "MWFeedParser/NSString+HTML (1.0.1)"
+  - Nuke (7.5.2)
 
 DEPENDENCIES:
   - MWFeedParser
+  - Nuke
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - MWFeedParser
+    - Nuke
 
 SPEC CHECKSUMS:
   MWFeedParser: 2cf646014c1baf6ad1b08c480b40a08180079247
+  Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
 
-PODFILE CHECKSUM: 5dc9cf5a1fd2ae45e54d17ca41a295ffa890a50e
+PODFILE CHECKSUM: 19b56ebd71c6b0d324853c3148f5747422e85377
 
 COCOAPODS: 1.5.3

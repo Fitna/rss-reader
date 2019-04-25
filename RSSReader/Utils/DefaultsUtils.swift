@@ -19,7 +19,7 @@ enum DefaultsUtils {
             channels = try? JSONDecoder().decode([RSSChannel].self, from: data)
         }
         return channels ?? [RSSChannel(url: URL(string: "https://www.liga.net/news/rss.xml")!),
-                            RSSChannel(url: URL(string: "https://www.liga.net/tech/technology/rss.xml")!),
+                            RSSChannel(url: URL(string: "https://www.liga.net/tech/technology/rss.xml")!, favorite: true),
                             RSSChannel(url: URL(string: "https://www.liga.net/fin/crypto/rss.xml")!)]
     }
 

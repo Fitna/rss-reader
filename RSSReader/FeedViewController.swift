@@ -7,6 +7,7 @@
 
 import UIKit
 import MWFeedParser
+import Nuke
 
 enum FeedViewControllerMode {
     case all, favorites
@@ -89,8 +90,15 @@ extension FeedViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RSSFeedCollectionViewCell.className, for: indexPath)
-        if let feedCell = cell as? RSSFeedCollectionViewCell {
-            feedCell.feedItem = feedItems[safe: indexPath.item]
+        if let feedCell = cell as? RSSFeedCollectionViewCell, let item = feedItems[safe: indexPath.item] {
+            feedCell.feedItem = item
+            feedCell.ivImage.image = UIImage(named: "rss60")
+
+            if let imgURL = item.imageURL() {
+                Nuke.loadImage(with: imgURL,
+                               options: ImageLoadingOptions(failureImage: UIImage(named: "rss60")),
+                               into: feedCell.ivImage)
+            }
         }
         return cell
     }

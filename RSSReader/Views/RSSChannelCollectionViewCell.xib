@@ -49,7 +49,7 @@
                             <action selector="addToFavoritesAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="zL9-68-s3a"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JA4-uL-5Dr">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JA4-uL-5Dr">
                         <rect key="frame" x="179" y="10" width="104" height="30"/>
                         <state key="normal" title="url to clipboard"/>
                         <connections>

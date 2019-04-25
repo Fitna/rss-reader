@@ -12,6 +12,7 @@ class RSSFeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var ivImage: UIImageView!
 
     var feedItem: MWFeedItem? { didSet { updateFeedItem() } }
 

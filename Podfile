@@ -6,5 +6,6 @@ target 'RSSReader' do
   use_frameworks!
   
   pod 'MWFeedParser'
+  pod 'Nuke'
 
 end

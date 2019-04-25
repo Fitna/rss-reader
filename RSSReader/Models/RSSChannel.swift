@@ -11,10 +11,11 @@ class RSSChannel: Codable, Equatable {
     let url: URL
     var title: String?
     var summary: String?
-    var favorite: Bool = false
+    var favorite: Bool
 
-    init(url: URL) {
+    init(url: URL, favorite: Bool = false) {
         self.url = url
+        self.favorite = favorite
     }
 
     static func == (lhs: RSSChannel, rhs: RSSChannel) -> Bool {
