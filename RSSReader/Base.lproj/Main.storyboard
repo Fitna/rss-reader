@@ -58,7 +58,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M1N-kd-VEN">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M1N-kd-VEN">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xP3-TY-BKx">
@@ -92,11 +92,42 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cvFeed" destination="M1N-kd-VEN" id="FWG-px-ksx"/>
+                        <segue destination="n8C-UI-HeU" kind="show" identifier="toWebView" id="KEL-i9-bbn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3r6-lw-1Od" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1712" y="-19"/>
+        </scene>
+        <!--Web View View Controller-->
+        <scene sceneID="9rF-e6-xtC">
+            <objects>
+                <viewController id="n8C-UI-HeU" customClass="WebViewViewController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kNA-LD-0Ce">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5yk-9q-ac1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5yk-9q-ac1" firstAttribute="top" secondItem="kNA-LD-0Ce" secondAttribute="top" id="37f-Pb-193"/>
+                            <constraint firstAttribute="bottom" secondItem="5yk-9q-ac1" secondAttribute="bottom" id="4ug-iO-lxv"/>
+                            <constraint firstAttribute="trailing" secondItem="5yk-9q-ac1" secondAttribute="trailing" id="KMH-gl-pJ7"/>
+                            <constraint firstItem="5yk-9q-ac1" firstAttribute="leading" secondItem="kNA-LD-0Ce" secondAttribute="leading" id="k3J-Q9-wlU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Sjd-7h-iDN"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="5yk-9q-ac1" id="fqE-QE-V97"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g9p-VP-dVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2645" y="-19"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="XkD-kg-TQS">

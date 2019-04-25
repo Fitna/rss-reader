@@ -33,10 +33,8 @@ class RSSParcer: NSObject {
     private func parce(with completion: @escaping (([MWFeedItem], Error?) -> Void)) {
         self.completions.append(completion)
         if isPacring {
-            print("skip parce for \(self.channel.url)")
             return
         }
-        print("parce for \(self.channel.url)")
         isPacring = true
 
         DispatchQueue.global(qos: .background).async {
@@ -65,7 +63,6 @@ extension RSSParcer: MWFeedParserDelegate {
 
     func feedParserDidFinish(_ parser: MWFeedParser!) {
         DispatchQueue.main.async {
-            print("finish parce for \(self.channel.url)")
             for completion in self.completions {
                 completion(self.items, nil)
             }
@@ -76,7 +73,7 @@ extension RSSParcer: MWFeedParserDelegate {
 
     func feedParser(_ parser: MWFeedParser!, didFailWithError error: Error!) {
         DispatchQueue.main.async {
-            print("error parce for \(self.channel.url): \(error.localizedDescription)")
+            print("parser error \(self.channel.url): \(error.localizedDescription)")
             for completion in self.completions {
                 completion(self.items, error)
             }

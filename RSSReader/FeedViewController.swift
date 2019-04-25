@@ -77,6 +77,13 @@ class FeedViewController: UIViewController {
             }
         }
     }
+
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let web = segue.destination as? WebViewViewController, let link = sender as? URL {
+            web.link = link
+        }
+    }
 }
 
 extension FeedViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -101,5 +108,11 @@ extension FeedViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
         }
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let link = feedItems[safe: indexPath.item]?.link, let url = URL(string: link) {
+            self.performSegue(withIdentifier: "toWebView", sender: url)
+        }
     }
 }
